@@ -203,8 +203,6 @@ button,
 }
 
 .content {
-  background-image: url("./images/space_background.jpg");
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -231,10 +229,6 @@ button,
 .legend li {
   display: flex;
   align-items: center;
-}
-
-.bottom .distanceContainer {
-  grid: 1 / 1 / 2 / 4;
 }
 
 .animations {
