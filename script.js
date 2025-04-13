@@ -45,6 +45,7 @@ window.onload = function () {
   );
 };
 
+// Empty object to place our markers in when we have multiple check boxes
 const markers = {};
 
 function checkBox() {
@@ -77,7 +78,7 @@ function checkBox() {
         popupAnchor: [-4, -37],
       });
 
-      // Checkmarked Box we create a marker using the data provided for each section
+      // We create a marker using the data provided for each section based on if it is checked
       if (isChecked) {
         const marker = L.marker([lat, lng], { icon: icon })
           .addTo(map)
@@ -89,12 +90,19 @@ function checkBox() {
             </div>
           `)
           .openPopup();
-          map.setView([lat, lng], 18);
+
+        // Set our view to center
+        map.setView([lat, lng], 18);
+        // Store our marker object inside the markers object with our planet name
         markers[planet] = marker;
+
       } else {
+
+        // Removes the marker from the object when the planet is unchecked
         if (markers[planet]) {
           map.removeLayer(markers[planet]);
           delete markers[planet];
+
         }
       }
     });
@@ -109,13 +117,15 @@ function opening() {
   console.log(openScreen);
   openScreen.style.opacity = 0;
 
+  // console.log to check
   console.log("this works");
+
   // Add fade-out class to start transition
   openScreen.classList.add("fade-out");
 
-  // After the transition ends, remove it completely from DOM
+  // After the transition ends, remove it completely to allow interaction with main page
   setTimeout(() => {
     openScreen.remove();
-  }, 2800); // Match this to your CSS transition duration
+  }, 2800); // Roughly our CSS transition duration
 }
 
