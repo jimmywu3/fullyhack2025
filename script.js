@@ -48,21 +48,28 @@ window.onload = function () {
 const markers = {};
 
 function checkBox() {
+
+  // Select all with college-check class
   const checkboxes = document.querySelectorAll(".college-check");
 
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
+
+      // Returns true if its checked or false if its not
       const isChecked = this.checked;
+
+      // Assign variables to our data we assigned in html
       const name = this.dataset.name;
       const building = this.dataset.pic
       const planet = this.dataset.planet;
       const lat = parseFloat(this.dataset.lat);
       const lng = parseFloat(this.dataset.lng);
 
-      // Convert planet name to lowercase to match image file names
+      // Fill in iconUrl with the given planet.png format and building.jpg format
       const iconUrl = `images/${planet}.png`;
       const popupImageUrl = `images/${building}.jpg`;
 
+      // Preset icon dimensions 
       const icon = L.icon({
         iconUrl: iconUrl,
         iconSize: [30, 30],
@@ -70,6 +77,7 @@ function checkBox() {
         popupAnchor: [-4, -37],
       });
 
+      // Checkmarked Box we create a marker using the data provided for each section
       if (isChecked) {
         const marker = L.marker([lat, lng], { icon: icon })
           .addTo(map)
@@ -81,7 +89,7 @@ function checkBox() {
             </div>
           `)
           .openPopup();
-
+          map.setView([lat, lng], 18);
         markers[planet] = marker;
       } else {
         if (markers[planet]) {
