@@ -180,16 +180,6 @@ body {
   grid-template-columns: repeat(3, 1fr);
 }
 
-.bottom .temp{
-  background-color: green;
-  grid-area: 1 / 1 / 1 / 2;
-}
-
-.bottom .alienPrisoner{
-  grid-area: 1 / 2 / 1 / 2;
-  max-width: 100%;
-}
-
 .animations {
   z-index: 0;
 }
