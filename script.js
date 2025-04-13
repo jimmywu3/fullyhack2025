@@ -1,28 +1,34 @@
 let map, marker, engMarker;
+let userLat = 0;
+let userLng = 0;
 
 window.onload = function () {
   
+  // Mouse move will constantly update the mouse area due to there being no default cursor shown
   document.addEventListener("mousemove", (e) => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.left = `${e.clientX}px`;
     cursor.style.top = `${e.clientY}px`;
   });
   
+  // Mouse down will generate the clicked png 
   document.addEventListener("mousedown", () => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.backgroundImage = 'url("images/astronaut-clicked.png")';
   });
   
+  // Always makes the mouse stay as astronaut
   document.addEventListener("mouseup", () => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.backgroundImage = 'url("images/astronaut.png")';
   });
 
+  // watchPosition constantly updates the user's location so we use this function
   navigator.geolocation.watchPosition(
     function (position) {
       // Variables for user position
-      const userLat = position.coords.latitude;
-      const userLng = position.coords.longitude;
+      userLat = position.coords.latitude;
+      userLng = position.coords.longitude;
 
       // Initialize map only once based on user location
       if (!map) {
@@ -55,6 +61,7 @@ window.onload = function () {
     },
     null,
     {
+      // enableHighAccuracy will update the user's location frequently once allowed 
       enableHighAccuracy: true,
       maximumAge: 0,
       timeout: 10000,
@@ -80,6 +87,11 @@ function checkBox() {
       const planet = this.dataset.planet;
       const lat = parseFloat(this.dataset.lat);
       const lng = parseFloat(this.dataset.lng);
+      console.log("User:", userLat, userLng);
+      console.log("Building:", lat, lng);
+
+      const distance = getDistanceInMiles(userLat, userLng, lat, lng);
+      console.log(`${distance.toFixed(2)} miles`);
 
       // Fill in iconUrl with the given planet.png format and building.jpg format
       const iconUrl = `images/${planet}.png`;
@@ -103,6 +115,7 @@ function checkBox() {
               <h3>${name} 📍</h3>
               <img src="${popupImageUrl}" style="width:150px; height:auto; margin: 10px 0;" />
               <p>This is the ${name}. Look here for more!</p>
+              <p><strong>${distance.toFixed(2)} miles away</strong></p>
             </div>
           `
           )
@@ -143,4 +156,22 @@ function opening() {
   setTimeout(() => {
     openScreen.remove();
   }, 2800); // Roughly our CSS transition duration
+}
+
+// Haversine Formula 
+function getDistanceInMiles(lat1, lng1, lat2, lng2) {
+  const R = 3958.8; // Radius of Earth in miles
+  const toRad = angle => angle * (Math.PI / 180);
+
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c; // Distance in miles
 }
