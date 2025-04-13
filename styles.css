@@ -279,3 +279,7 @@ button,
   background-position: center;
   background-size: 350px;
 }
+
+.distanceContainer {
+  font-size: 15px;
+}
