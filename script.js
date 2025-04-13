@@ -77,7 +77,7 @@ function checkBox() {
             <div style="text-align:center;">
               <h3>${name} 📍</h3>
               <img src="${popupImageUrl}" style="width:150px; height:auto; margin: 10px 0;" />
-              <p>This is the ${name} building. Look here for more!</p>
+              <p>This is the ${name}. Look here for more!</p>
             </div>
           `)
           .openPopup();
@@ -96,6 +96,7 @@ function checkBox() {
 // On load will begin to load the map based on user location
 function opening() {
 
+  // Opening is called
   openScreen = document.getElementById("openScreen");
   console.log(openScreen);
   openScreen.style.opacity = 0;
