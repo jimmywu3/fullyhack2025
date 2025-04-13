@@ -1,6 +1,22 @@
 let map, marker, engMarker;
 
 // On load will begin to load the map based on user location
+// window.onload = function () {
+//     // 1. Cover screen setup
+//     const startBtn = document.getElementById("startBtn");
+//     const openScreen = document.getElementById("openScreen");
+//     const mainContent = document.getElementById("mainContent");
+
+//     startBtn.addEventListener("click", function () {
+//       openScreen.style.transition = "opacity 1s ease";
+//       openScreen.style.opacity = 0;
+
+//       setTimeout(() => {
+//         openScreen.style.display = "none";
+//         mainContent.style.display = "block";
+//       }, 1000); // Match transition duration
+//     });
+
 window.onload = function () {
   navigator.geolocation.watchPosition(
     function (position) {
@@ -18,10 +34,10 @@ window.onload = function () {
 
         // Custom marker for user
         const customIcon = L.icon({
-          iconUrl: "images/marker-icon.png",
-          iconSize: [22, 38],
+          iconUrl: "images/astronaut_icon.png",
+          iconSize: [40, 50],
           iconAnchor: [19, 38],
-          popupAnchor: [-7, -37],
+          popupAnchor: [3, -39],
         });
 
         // Apply marker to the map
@@ -65,7 +81,13 @@ function checkBox() {
     if (isChecked) {
       engMarker = L.marker([lat, lng], { icon: engineeringIcon })
         .addTo(map)
-        .bindPopup("Engineering and Computer Science 📍")
+        .bindPopup(`
+          <div style="text-align:center;">
+            <h3>Engineering and Computer Science 📍</h3>
+            <img src="images/engineering-building.jpg" style="width:150px; height:auto; margin-bottom: 10px; margin-top: 10px;"/>
+            <p>This is the Engineering Building. Look here for more!</p>
+          </div>
+          `)
         .openPopup();
     } else {
       if (engMarker) {
