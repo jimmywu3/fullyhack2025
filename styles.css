@@ -39,6 +39,10 @@
   margin-top: 1rem;
 }
 
+#openScreen img{
+  height: 70%;
+}
+
 .main {
   display: flex;
 }
