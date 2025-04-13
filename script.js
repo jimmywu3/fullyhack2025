@@ -1,6 +1,23 @@
 let map, marker, engMarker;
 
 window.onload = function () {
+  
+  document.addEventListener("mousemove", (e) => {
+    const cursor = document.getElementById("custom-cursor");
+    cursor.style.left = `${e.clientX}px`;
+    cursor.style.top = `${e.clientY}px`;
+  });
+  
+  document.addEventListener("mousedown", () => {
+    const cursor = document.getElementById("custom-cursor");
+    cursor.style.backgroundImage = 'url("images/astronaut-clicked.png")';
+  });
+  
+  document.addEventListener("mouseup", () => {
+    const cursor = document.getElementById("custom-cursor");
+    cursor.style.backgroundImage = 'url("images/astronaut.png")';
+  });
+
   navigator.geolocation.watchPosition(
     function (position) {
       // Variables for user position
