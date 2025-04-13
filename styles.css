@@ -1,12 +1,12 @@
 :root {
-  --saturn-color: red;
-  --mars: blue;
-  --mercury: green;
-  --venus: purple;
-  --neptune: pink;
-  --earth: orange;
-  --uranus: yellowgreen;
-  --pluto: maroon;
+  --saturn-color: #fce79a;
+  --mars: #bc2731;
+  --mercury: #67a6ac;
+  --venus: #eed053;
+  --neptune: #007dac;
+  --earth: green;
+  --uranus: #ace5ee;
+  --pluto: #34acb1;
 }
 
 * {
