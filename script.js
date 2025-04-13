@@ -49,19 +49,17 @@ window.onload = function () {
 const markers = {};
 
 function checkBox() {
-
   // Select all with college-check class
   const checkboxes = document.querySelectorAll(".college-check");
 
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
-
       // Returns true if its checked or false if its not
       const isChecked = this.checked;
 
       // Assign variables to our data we assigned in html
       const name = this.dataset.name;
-      const building = this.dataset.pic
+      const building = this.dataset.pic;
       const planet = this.dataset.planet;
       const lat = parseFloat(this.dataset.lat);
       const lng = parseFloat(this.dataset.lng);
@@ -70,7 +68,7 @@ function checkBox() {
       const iconUrl = `images/${planet}.png`;
       const popupImageUrl = `images/${building}.jpg`;
 
-      // Preset icon dimensions 
+      // Preset icon dimensions
       const icon = L.icon({
         iconUrl: iconUrl,
         iconSize: [30, 30],
@@ -82,27 +80,26 @@ function checkBox() {
       if (isChecked) {
         const marker = L.marker([lat, lng], { icon: icon })
           .addTo(map)
-          .bindPopup(`
+          .bindPopup(
+            `
             <div style="text-align:center;">
               <h3>${name} 📍</h3>
               <img src="${popupImageUrl}" style="width:150px; height:auto; margin: 10px 0;" />
               <p>This is the ${name}. Look here for more!</p>
             </div>
-          `)
+          `
+          )
           .openPopup();
 
         // Set our view to center
         map.setView([lat, lng], 18);
         // Store our marker object inside the markers object with our planet name
         markers[planet] = marker;
-
       } else {
-
         // Removes the marker from the object when the planet is unchecked
         if (markers[planet]) {
           map.removeLayer(markers[planet]);
           delete markers[planet];
-
         }
       }
     });
@@ -111,10 +108,11 @@ function checkBox() {
 
 // On load will begin to load the map based on user location
 function opening() {
-
   // Opening is called
   openScreen = document.getElementById("openScreen");
+  chiikawa = document.querySelector(".openChiikawa");
   console.log(openScreen);
+  console.log(chiikawa);
   openScreen.style.opacity = 0;
 
   // console.log to check
@@ -122,10 +120,10 @@ function opening() {
 
   // Add fade-out class to start transition
   openScreen.classList.add("fade-out");
+  chiikawa.classList.add("slide-out-blurred-top");
 
   // After the transition ends, remove it completely to allow interaction with main page
   setTimeout(() => {
     openScreen.remove();
   }, 2800); // Roughly our CSS transition duration
 }
-
