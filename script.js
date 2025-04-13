@@ -38,7 +38,7 @@ window.onload = function () {
       // Error handling
       function (error) {
         console.error("Location access denied or unavailable:", error.message);
-        alert("Please enable location services to view your current position on the map.");
+        //alert("Please enable location services to view your current position on the map.");
       },
   
       // Optional settings
