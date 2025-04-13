@@ -196,6 +196,9 @@ input, button, #map, .leaflet-container {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
   grid-template-columns: repeat(3, 1fr);
+  background-image: url("./images/space_background.jpg");
+  background-size: 1000px;
+
 }
 
 .animations {
