@@ -2,6 +2,11 @@
   --saturn-color: red;
   --mars: blue;
   --mercury: green;
+  --venus: purple;
+  --neptune: pink;
+  --earth: orange;
+  --uranus: yellowgreen;
+  --pluto: maroon;
 }
 
 * {
@@ -23,7 +28,7 @@
 }
 
 .legend {
-  list-style-type: none;    
+  list-style-type: none;
 }
 
 .saturn {
@@ -36,6 +41,26 @@
 
 .mercury {
   color: var(--mercury);
+}
+
+.venus {
+  color: var(--venus);
+}
+
+.neptune {
+  color: var(--neptune);
+}
+
+.earth {
+  color: var(--earth);
+}
+
+.uranus {
+  color: var(--uranus);
+}
+
+.pluto {
+  color: var(--pluto);
 }
 
 .searchbox {
@@ -52,6 +77,8 @@
 }
 
 .content {
+  background-image: url("./images/space_background.jpg");
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
