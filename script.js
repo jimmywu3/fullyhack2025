@@ -3,20 +3,20 @@ let userLat = 0;
 let userLng = 0;
 
 window.onload = function () {
-  
+
   // Mouse move will constantly update the location of the astronaut cursor
   document.addEventListener("mousemove", (e) => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.left = `${e.clientX}px`;
     cursor.style.top = `${e.clientY}px`;
   });
-  
+
   // Mouse down (when our mouse is clicked) will produce the clicked png 
   document.addEventListener("mousedown", () => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.backgroundImage = 'url("images/astronaut-clicked.png")';
   });
-  
+
   // Mouse up (when our mouse is released) will reset back to our custom cursor
   document.addEventListener("mouseup", () => {
     const cursor = document.getElementById("custom-cursor");
@@ -98,6 +98,8 @@ function checkBox() {
       // Our function getDistanceInMiles is located at the bottom and
       // calculates the straight line distance from the user
       const distance = getDistanceInMiles(userLat, userLng, lat, lng);
+      const header = document.getElementById("distance-header");
+      header.textContent = `Distance till nearest water fountain: ${distance.toFixed(2)} miles`;
 
       // Console log to make sure it is reached correctly
       console.log(`${distance.toFixed(2)} miles`);
@@ -135,10 +137,26 @@ function checkBox() {
         // Store our marker object inside the markers object with our planet name
         markers[planet] = marker;
       } else {
+
         // Removes the marker from the object when the planet is unchecked
         if (markers[planet]) {
           map.removeLayer(markers[planet]);
           delete markers[planet];
+        }
+
+        // We can check what's still checked and update distance to that
+        const stillChecked = [...checkboxes].find(cb => cb.checked);
+
+        if (stillChecked) {
+          const newLat = parseFloat(stillChecked.dataset.lat);
+          const newLng = parseFloat(stillChecked.dataset.lng);
+          const newDistance = getDistanceInMiles(userLat, userLng, newLat, newLng);
+          header.textContent = `Distance till nearest water fountain: ${newDistance.toFixed(2)} miles`;
+        } else {
+
+          // If none left checked reset it back to no distance shown
+          header.textContent = `Distance till nearest water fountain:`;
+          
         }
       }
     });
