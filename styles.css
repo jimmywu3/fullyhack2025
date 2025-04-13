@@ -33,3 +33,8 @@
   height: 100vh;
   width: 100vw;
 }
+
+.legend {
+  font-size: 13px;
+  padding-right: 5px;
+}
