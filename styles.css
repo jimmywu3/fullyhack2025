@@ -66,3 +66,7 @@
   height: 85%;
   width: 80%;
 }
+.legend {
+  font-size: 13px;
+  padding-right: 5px;
+}
