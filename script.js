@@ -1,28 +1,35 @@
 let map, marker, engMarker;
+let userLat = 0;
+let userLng = 0;
 
 window.onload = function () {
   
+  // Mouse move will constantly update the location of the astronaut cursor
   document.addEventListener("mousemove", (e) => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.left = `${e.clientX}px`;
     cursor.style.top = `${e.clientY}px`;
   });
   
+  // Mouse down (when our mouse is clicked) will produce the clicked png 
   document.addEventListener("mousedown", () => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.backgroundImage = 'url("images/astronaut-clicked.png")';
   });
   
+  // Mouse up (when our mouse is released) will reset back to our custom cursor
   document.addEventListener("mouseup", () => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.backgroundImage = 'url("images/astronaut.png")';
   });
 
+  // watchPosition constantly updates the user's location so we use this function
   navigator.geolocation.watchPosition(
     function (position) {
+
       // Variables for user position
-      const userLat = position.coords.latitude;
-      const userLng = position.coords.longitude;
+      userLat = position.coords.latitude;
+      userLng = position.coords.longitude;
 
       // Initialize map only once based on user location
       if (!map) {
@@ -32,7 +39,7 @@ window.onload = function () {
           attribution: "&copy; OpenStreetMap contributors",
         }).addTo(map);
 
-        // Custom marker for user
+        // Custom marker for user marker
         const customIcon = L.icon({
           iconUrl: "images/astronaut_icon.png",
           iconSize: [40, 50],
@@ -55,6 +62,7 @@ window.onload = function () {
     },
     null,
     {
+      // enableHighAccuracy will update the user's location frequently once allowed 
       enableHighAccuracy: true,
       maximumAge: 0,
       timeout: 10000,
@@ -66,11 +74,15 @@ window.onload = function () {
 const markers = {};
 
 function checkBox() {
-  // Select all with college-check class
+  // Select all with college-check class, querySelectorAll stores the elements with ".college-check"
+  // Almost like an array but is called a NodeList
   const checkboxes = document.querySelectorAll(".college-check");
 
+  // forEach goes through each node like a loop and checks if the checkboxes been checked
+  // And proceeds with assigning variables based on pre-data assignment from the HTML
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
+
       // Returns true if its checked or false if its not
       const isChecked = this.checked;
 
@@ -80,6 +92,15 @@ function checkBox() {
       const planet = this.dataset.planet;
       const lat = parseFloat(this.dataset.lat);
       const lng = parseFloat(this.dataset.lng);
+      console.log("User:", userLat, userLng);
+      console.log("Building:", lat, lng);
+
+      // Our function getDistanceInMiles is located at the bottom and
+      // calculates the straight line distance from the user
+      const distance = getDistanceInMiles(userLat, userLng, lat, lng);
+
+      // Console log to make sure it is reached correctly
+      console.log(`${distance.toFixed(2)} miles`);
 
       // Fill in iconUrl with the given planet.png format and building.jpg format
       const iconUrl = `images/${planet}.png`;
@@ -103,6 +124,7 @@ function checkBox() {
               <h3>${name} 📍</h3>
               <img src="${popupImageUrl}" style="width:150px; height:auto; margin: 10px 0;" />
               <p>This is the ${name}. Look here for more!</p>
+              <p><strong>${distance.toFixed(2)} miles away</strong></p>
             </div>
           `
           )
@@ -123,7 +145,7 @@ function checkBox() {
   });
 }
 
-// On load will begin to load the map based on user location
+// On load will begin with the opening screen to start the website
 function opening() {
   // Opening is called
   openScreen = document.getElementById("openScreen");
@@ -147,4 +169,22 @@ function opening() {
   setTimeout(() => {
     openScreen.remove();
   }, 2800); // Roughly our CSS transition duration
+}
+
+// Haversine Formula 
+function getDistanceInMiles(lat1, lng1, lat2, lng2) {
+  const R = 3958.8; // Radius of Earth in miles
+  const toRad = angle => angle * (Math.PI / 180);
+
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c; // Distance in miles
 }
