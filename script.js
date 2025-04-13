@@ -1,22 +1,5 @@
 let map, marker, engMarker;
 
-// On load will begin to load the map based on user location
-// window.onload = function () {
-//     // 1. Cover screen setup
-//     const startBtn = document.getElementById("startBtn");
-//     const openScreen = document.getElementById("openScreen");
-//     const mainContent = document.getElementById("mainContent");
-
-//     startBtn.addEventListener("click", function () {
-//       openScreen.style.transition = "opacity 1s ease";
-//       openScreen.style.opacity = 0;
-
-//       setTimeout(() => {
-//         openScreen.style.display = "none";
-//         mainContent.style.display = "block";
-//       }, 1000); // Match transition duration
-//     });
-
 window.onload = function () {
   navigator.geolocation.watchPosition(
     function (position) {
@@ -110,10 +93,20 @@ function checkBox() {
   });
 }
 
-opening = () => {
+// On load will begin to load the map based on user location
+function opening() {
+
   openScreen = document.getElementById("openScreen");
   console.log(openScreen);
-  openScreen.style.opacity = "0";
-};
+  openScreen.style.opacity = 0;
 
-opening();
+  console.log("this works");
+  // Add fade-out class to start transition
+  openScreen.classList.add("fade-out");
+
+  // After the transition ends, remove it completely from DOM
+  setTimeout(() => {
+    openScreen.remove();
+  }, 800); // Match this to your CSS transition duration
+}
+
