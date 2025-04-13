@@ -1,22 +1,5 @@
 let map, marker, engMarker;
 
-// On load will begin to load the map based on user location
-// window.onload = function () {
-//     // 1. Cover screen setup
-//     const startBtn = document.getElementById("startBtn");
-//     const openScreen = document.getElementById("openScreen");
-//     const mainContent = document.getElementById("mainContent");
-
-//     startBtn.addEventListener("click", function () {
-//       openScreen.style.transition = "opacity 1s ease";
-//       openScreen.style.opacity = 0;
-
-//       setTimeout(() => {
-//         openScreen.style.display = "none";
-//         mainContent.style.display = "block";
-//       }, 1000); // Match transition duration
-//     });
-
 window.onload = function () {
   navigator.geolocation.watchPosition(
     function (position) {
@@ -62,49 +45,68 @@ window.onload = function () {
   );
 };
 
-function checkBox() {
-  // ID "eng-check" tied to our checkbox for Engineering building as reference
-  const engCheck = document.getElementById("eng-check");
-  engCheck.addEventListener("change", function () {
-    // 'this.checked' refers to engCheck returning if it is checked or not to isChecked variable
-    const isChecked = this.checked;
-    const lat = 33.882358;
-    const lng = -117.882983;
-    const engineeringIcon = L.icon({
-      iconUrl: "images/red.png",
-      iconSize: [30, 30],
-      iconAnchor: [19, 38],
-      popupAnchor: [-4, -37],
-    });
+const markers = {};
 
-    // If condition for marks on map when checkbox is checked
-    if (isChecked) {
-      engMarker = L.marker([lat, lng], { icon: engineeringIcon })
-        .addTo(map)
-        .bindPopup(
-          `
-          <div style="text-align:center;">
-            <h3>Engineering and Computer Science 📍</h3>
-            <img src="images/engineering-building.jpg" style="width:150px; height:auto; margin-bottom: 10px; margin-top: 10px;"/>
-            <p>This is the Engineering Building. Look here for more!</p>
-          </div>
-          `
-        )
-        .openPopup();
-    } else {
-      if (engMarker) {
-        map.removeLayer(engMarker);
-        engMarker = null;
+function checkBox() {
+  const checkboxes = document.querySelectorAll(".college-check");
+
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener("change", function () {
+      const isChecked = this.checked;
+      const name = this.dataset.name;
+      const building = this.dataset.pic
+      const planet = this.dataset.planet;
+      const lat = parseFloat(this.dataset.lat);
+      const lng = parseFloat(this.dataset.lng);
+
+      // Convert planet name to lowercase to match image file names
+      const iconUrl = `images/${planet}.png`;
+      const popupImageUrl = `images/${building}.jpg`;
+
+      const icon = L.icon({
+        iconUrl: iconUrl,
+        iconSize: [30, 30],
+        iconAnchor: [19, 38],
+        popupAnchor: [-4, -37],
+      });
+
+      if (isChecked) {
+        const marker = L.marker([lat, lng], { icon: icon })
+          .addTo(map)
+          .bindPopup(`
+            <div style="text-align:center;">
+              <h3>${name} 📍</h3>
+              <img src="${popupImageUrl}" style="width:150px; height:auto; margin: 10px 0;" />
+              <p>This is the ${name} building. Look here for more!</p>
+            </div>
+          `)
+          .openPopup();
+
+        markers[planet] = marker;
+      } else {
+        if (markers[planet]) {
+          map.removeLayer(markers[planet]);
+          delete markers[planet];
+        }
       }
-    }
+    });
   });
 }
 
-opening = () => {
+// On load will begin to load the map based on user location
+function opening() {
+
   openScreen = document.getElementById("openScreen");
   console.log(openScreen);
-  openScreen.style.opacity = "0";
+  openScreen.style.opacity = 0;
+
+  console.log("this works");
+  // Add fade-out class to start transition
+  openScreen.classList.add("fade-out");
+
+  // After the transition ends, remove it completely from DOM
   setTimeout(() => {
-    openScreen.style.display = "none";
-  }, 3000);
-};
+    openScreen.remove();
+  }, 2800); // Match this to your CSS transition duration
+}
+

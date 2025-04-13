@@ -1,5 +1,5 @@
 :root {
-  --saturn-color: #fce79a;
+  --saturn-color: #bb7431;
   --mars: #bc2731;
   --mercury: #67a6ac;
   --venus: #eed053;
@@ -181,7 +181,9 @@
 
 
 .border {
-  border: 3px solid red;
+  background-color: #ffe4f2;
+  border: 5px solid #9f45b0;
+  border-style: ridge;
 }
 
 .legend-header {
