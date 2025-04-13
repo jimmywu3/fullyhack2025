@@ -185,6 +185,11 @@ body {
   grid-area: 1 / 1 / 1 / 2;
 }
 
+.bottom .alienPrisoner{
+  grid-area: 1 / 2 / 1 / 2;
+  max-width: 100%;
+}
+
 .animations {
   z-index: 0;
 }
