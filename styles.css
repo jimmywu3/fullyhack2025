@@ -3,6 +3,12 @@
     width: 100vw;
 }
 
+#map {
+    display: block;
+    height: 400px;
+    width: 400px;
+}
+
 .searchbox {
     padding: 10px 10px;
     border-radius: 1rem;

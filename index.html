@@ -6,8 +6,20 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
+    <link rel="stylesheet" href="/path/to/leaflet.css" />
+    <script src="/path/to/leaflet.js"></script>
+    <script>
+      window.onload = function () {
+        var map = L.map('map').setView([34.0522, -118.2437], 13);
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+      };
+    </script>
   </head>
   <body>
+    <div id="map"></div>
     <div class="container">
       <div class="center">Fullyhack 2025</div>
       <input class="searchbox" type="text" id="user-input" placeholder="Search"/>
