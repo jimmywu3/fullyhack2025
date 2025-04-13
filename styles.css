@@ -71,6 +71,9 @@
   padding: 10px 10px;
   border-radius: 1rem;
   margin: 0 1rem;
+  width: 200px;
+  height: 20px;
+  padding-top: 10px;
 }
 
 .title {
@@ -121,4 +124,14 @@
   animation-iteration-count: infinite;
   animation-name: slide-in;
   animation-direction: alternate;
+}
+
+.border {
+  border: 3px solid red;
+}
+
+.legend-header {
+  font-family: Arial, Helvetica, sans-serif;
+  padding-left: 20px;
+  font-size: 15px;
 }
