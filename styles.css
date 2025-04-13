@@ -1,3 +1,9 @@
+:root {
+  --saturn-color: red;
+  --mars: blue;
+  --mercury: green;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,9 +16,26 @@
 
 .sidebar {
   width: 30vw;
+  height: 100vh;
   border-right: 3px solid black;
   display: flex;
   flex-direction: column;
+}
+
+.legend {
+  list-style-type: none;    
+}
+
+.saturn {
+  color: var(--saturn-color);
+}
+
+.mars {
+  color: var(--mars);
+}
+
+.mercury {
+  color: var(--mercury);
 }
 
 .searchbox {
@@ -28,8 +51,18 @@
   font-size: x-large;
 }
 
-#map {
-  display: block;
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   width: 100vw;
+}
+
+#map {
+  border: 2px solid black;
+  border-radius: 1rem;
+  display: block;
+  height: 85%;
+  width: 80%;
 }
