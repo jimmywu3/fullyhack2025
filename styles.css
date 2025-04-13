@@ -10,6 +10,10 @@
   --space: #373757;
 }
 
+.college-check {
+  margin-right: 20px;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -131,7 +135,7 @@
   z-index: 1;
 }
 .legend {
-  font-size: 13px;
+  font-size: 12px;
   padding-right: 5px;
 }
 
