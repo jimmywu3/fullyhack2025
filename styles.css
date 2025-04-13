@@ -7,6 +7,7 @@
   --earth: green;
   --uranus: #ace5ee;
   --pluto: #34acb1;
+  --space: #373757;
 }
 
 * {
@@ -20,19 +21,22 @@
   position: absolute;
   height: 100dvh;
   width: 100dvw;
-  background-color: black;
+  background-color: var(--space);
   opacity: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: 3s;
-  /* display: none; */
 }
 
 #openScreen .startContainer {
   z-index: inherit;
-  background-color: green;
+  background-color: whitesmoke;
+  width: 10rem; 
+  height: 2rem; 
+  border-radius: 1rem;
+  margin-top: 1rem;
 }
 
 .main {
@@ -92,7 +96,7 @@
   padding: 10px 10px;
   border-radius: 1rem;
   margin: 0 1rem;
-  width: 200px;
+  width: 80%;
   height: 20px;
   padding-top: 10px;
 }
@@ -141,11 +145,21 @@
   z-index: 0;
 }
 
-.catUFO {
+.animations img{
   position: absolute;
   width: 100px;
+}
+
+.chiikawa {
   top: 0px;
   left: 30%;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-name: slide-in;
+  animation-direction: alternate;
+}
+
+.alien{
   animation-duration: 5s;
   animation-iteration-count: infinite;
   animation-name: slide-in;
@@ -163,6 +177,9 @@
     scale: 100% 1;
   }
 }
+
+
+
 .border {
   border: 3px solid red;
 }
