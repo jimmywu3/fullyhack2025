@@ -128,6 +128,8 @@ function opening() {
   // Opening is called
   openScreen = document.getElementById("openScreen");
   chiikawa = document.querySelector(".openChiikawa");
+  starL = document.querySelector(".starL");
+  starR = document.querySelector(".starR");
   console.log(openScreen);
   console.log(chiikawa);
   openScreen.style.opacity = 0;
@@ -138,6 +140,8 @@ function opening() {
   // Add fade-out class to start transition
   openScreen.classList.add("fade-out");
   chiikawa.classList.add("slide-out-blurred-top");
+  starL.classList.add("roll-out-left");
+  starR.classList.add("roll-out-right");
 
   // After the transition ends, remove it completely to allow interaction with main page
   setTimeout(() => {

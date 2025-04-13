@@ -23,10 +23,15 @@
 body {
   overflow: hidden;
   cursor: none;
+  background-image: url("./images/space_background.jpg");
+  background-size: cover;
 }
 
-input, button, #map, .leaflet-container {
-    cursor: none;
+input,
+button,
+#map,
+.leaflet-container {
+  cursor: none;
 }
 
 #custom-cursor {
@@ -35,7 +40,7 @@ input, button, #map, .leaflet-container {
   left: 0;
   width: 40px;
   height: 40px;
-  background-image: url('images/astronaut.png');
+  background-image: url("images/astronaut.png");
   background-size: contain;
   background-repeat: no-repeat;
   pointer-events: none;
@@ -66,8 +71,15 @@ input, button, #map, .leaflet-container {
   margin-top: 1rem;
 }
 
-#openScreen img {
-  height: 70%;
+#openScreen .openImages {
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#openScreen .stars{
+  height: 20%;
 }
 
 /* Animation */
@@ -87,6 +99,36 @@ input, button, #map, .leaflet-container {
     transform: translateY(-1000px) scaleY(2) scaleX(0.2);
     transform-origin: 50% 0%;
     filter: blur(40px);
+    opacity: 0;
+  }
+}
+
+.roll-out-left {
+	animation: roll-out-left 0.6s ease-in both;
+}
+
+@keyframes roll-out-left {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-1000px) rotate(-540deg);
+    opacity: 0;
+  }
+}
+
+.roll-out-right {
+	animation: roll-out-right 0.6s ease-in both;
+}
+
+@keyframes roll-out-right {
+  0% {
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(1000px) rotate(540deg);
     opacity: 0;
   }
 }
@@ -191,14 +233,8 @@ input, button, #map, .leaflet-container {
   align-items: center;
 }
 
-.bottom {
-  height: 100%;
-  display: grid;
-  grid-template-rows: repeat(4, 1fr);
-  grid-template-columns: repeat(3, 1fr);
-  background-image: url("./images/space_background.jpg");
-  background-size: 1000px;
-
+.bottom .distanceContainer {
+  grid: 1 / 1 / 2 / 4;
 }
 
 .animations {
@@ -220,9 +256,15 @@ input, button, #map, .leaflet-container {
 }
 
 @keyframes slide-in {
-  20% {translate: 1000px}
-  40% {translate: 1000px 700px}
-  60% {translate: 0px 700px}
+  20% {
+    translate: 1000px;
+  }
+  40% {
+    translate: 1000px 700px;
+  }
+  60% {
+    translate: 0px 700px;
+  }
 }
 
 .border {
