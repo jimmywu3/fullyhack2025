@@ -8,6 +8,7 @@
   --uranus: #ace5ee;
   --pluto: #34acb1;
   --space: #373757;
+  --sun: #FF8C00;
 }
 
 .college-check {
@@ -152,6 +153,10 @@ button,
 
 .legend li {
   margin: 0.5rem 0;
+}
+
+.sun {
+  color: var(--sun);
 }
 
 .saturn {
