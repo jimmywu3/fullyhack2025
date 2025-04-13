@@ -107,6 +107,6 @@ function opening() {
   // After the transition ends, remove it completely from DOM
   setTimeout(() => {
     openScreen.remove();
-  }, 800); // Match this to your CSS transition duration
+  }, 2800); // Match this to your CSS transition duration
 }
 
