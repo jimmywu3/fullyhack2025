@@ -92,6 +92,8 @@ function checkBox() {
       console.log("User:", userLat, userLng);
       console.log("Building:", lat, lng);
 
+      
+
       // Our function getDistanceInMiles is located at the bottom and
       // calculates the straight line distance from the user
       const distance = getDistanceInMiles(userLat, userLng, lat, lng);
@@ -135,30 +137,7 @@ function checkBox() {
         map.setView([lat, lng], 18);
         // Store our marker object inside the markers object with our planet name
         markers[planet] = marker;
-
-               // We can check what's still checked and update distance to that
-               const checkedBoxes = [...checkboxes].filter((cb) => cb.checked);
-
-               if (checkedBoxes.length > 0) {
-                 // Loop through checked boxes and find the closest
-                 let minDistance = Infinity;
-       
-                 checkedBoxes.forEach((cb) => {
-                   const lat = parseFloat(cb.dataset.lat);
-                   const lng = parseFloat(cb.dataset.lng);
-                   const distance = getDistanceInMiles(userLat, userLng, lat, lng);
-       
-                   if (distance < minDistance) {
-                     minDistance = distance;
-                   }
-                 });
-       
-                 header.textContent = `Distance till nearest water fountain: ${minDistance.toFixed(
-                   2
-                 )} miles`;
-               } else {
-                 header.textContent = `Distance till nearest water fountain:`;
-               }
+        
 
       } else {
         // Removes the marker from the object when the planet is unchecked
@@ -166,6 +145,35 @@ function checkBox() {
           map.removeLayer(markers[planet]);
           delete markers[planet];
         }
+    
+        
+      }
+
+      // checkedBoxes is a filter to loop through an array-like object
+      const checkedBoxes = [...checkboxes].filter(cb => cb.checked);
+
+      // If the array is more than 0 then we will consistently update the minimum distance when a
+      // checkbox is marked
+      if (checkedBoxes.length > 0) {
+        let minDistance = Infinity;
+  
+        checkedBoxes.forEach(cb => {
+          const lat = parseFloat(cb.dataset.lat);
+          const lng = parseFloat(cb.dataset.lng);
+          const distance = getDistanceInMiles(userLat, userLng, lat, lng);
+  
+          if (distance < minDistance) {
+            minDistance = distance;
+          }
+        });
+  
+        header.textContent = `Distance till nearest water fountain: ${minDistance.toFixed(2)} miles`;
+      } 
+      
+      // Else case if there is nothing checkmarked we will default it to no distance shown
+      else
+      {
+        header.textContent = `Distance till nearest water fountain:`;
       }
     });
   });
