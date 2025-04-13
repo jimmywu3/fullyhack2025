@@ -3,7 +3,6 @@ let userLat = 0;
 let userLng = 0;
 
 window.onload = function () {
-
   // Mouse move will constantly update the location of the astronaut cursor
   document.addEventListener("mousemove", (e) => {
     const cursor = document.getElementById("custom-cursor");
@@ -11,7 +10,7 @@ window.onload = function () {
     cursor.style.top = `${e.clientY}px`;
   });
 
-  // Mouse down (when our mouse is clicked) will produce the clicked png 
+  // Mouse down (when our mouse is clicked) will produce the clicked png
   document.addEventListener("mousedown", () => {
     const cursor = document.getElementById("custom-cursor");
     cursor.style.backgroundImage = 'url("images/astronaut-clicked.png")';
@@ -26,7 +25,6 @@ window.onload = function () {
   // watchPosition constantly updates the user's location so we use this function
   navigator.geolocation.watchPosition(
     function (position) {
-
       // Variables for user position
       userLat = position.coords.latitude;
       userLng = position.coords.longitude;
@@ -62,7 +60,7 @@ window.onload = function () {
     },
     null,
     {
-      // enableHighAccuracy will update the user's location frequently once allowed 
+      // enableHighAccuracy will update the user's location frequently once allowed
       enableHighAccuracy: true,
       maximumAge: 0,
       timeout: 10000,
@@ -82,7 +80,6 @@ function checkBox() {
   // And proceeds with assigning variables based on pre-data assignment from the HTML
   checkboxes.forEach((checkbox) => {
     checkbox.addEventListener("change", function () {
-
       // Returns true if its checked or false if its not
       const isChecked = this.checked;
 
@@ -99,7 +96,9 @@ function checkBox() {
       // calculates the straight line distance from the user
       const distance = getDistanceInMiles(userLat, userLng, lat, lng);
       const header = document.getElementById("distance-header");
-      header.textContent = `Distance till nearest water fountain: ${distance.toFixed(2)} miles`;
+      header.textContent = `Distance till nearest water fountain: ${distance.toFixed(
+        2
+      )} miles`;
 
       // Console log to make sure it is reached correctly
       console.log(`${distance.toFixed(2)} miles`);
@@ -137,7 +136,6 @@ function checkBox() {
         // Store our marker object inside the markers object with our planet name
         markers[planet] = marker;
       } else {
-
         // Removes the marker from the object when the planet is unchecked
         if (markers[planet]) {
           map.removeLayer(markers[planet]);
@@ -145,18 +143,27 @@ function checkBox() {
         }
 
         // We can check what's still checked and update distance to that
-        const stillChecked = [...checkboxes].find(cb => cb.checked);
+        const checkedBoxes = [...checkboxes].filter((cb) => cb.checked);
 
-        if (stillChecked) {
-          const newLat = parseFloat(stillChecked.dataset.lat);
-          const newLng = parseFloat(stillChecked.dataset.lng);
-          const newDistance = getDistanceInMiles(userLat, userLng, newLat, newLng);
-          header.textContent = `Distance till nearest water fountain: ${newDistance.toFixed(2)} miles`;
+        if (checkedBoxes.length > 0) {
+          // Loop through checked boxes and find the closest
+          let minDistance = Infinity;
+
+          checkedBoxes.forEach((cb) => {
+            const lat = parseFloat(cb.dataset.lat);
+            const lng = parseFloat(cb.dataset.lng);
+            const distance = getDistanceInMiles(userLat, userLng, lat, lng);
+
+            if (distance < minDistance) {
+              minDistance = distance;
+            }
+          });
+
+          header.textContent = `Distance till nearest water fountain: ${minDistance.toFixed(
+            2
+          )} miles`;
         } else {
-
-          // If none left checked reset it back to no distance shown
           header.textContent = `Distance till nearest water fountain:`;
-          
         }
       }
     });
@@ -189,18 +196,20 @@ function opening() {
   }, 2800); // Roughly our CSS transition duration
 }
 
-// Haversine Formula 
+// Haversine Formula
 function getDistanceInMiles(lat1, lng1, lat2, lng2) {
   const R = 3958.8; // Radius of Earth in miles
-  const toRad = angle => angle * (Math.PI / 180);
+  const toRad = (angle) => angle * (Math.PI / 180);
 
   const dLat = toRad(lat2 - lat1);
   const dLng = toRad(lng2 - lng1);
 
   const a =
     Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
-    Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    Math.cos(toRad(lat1)) *
+      Math.cos(toRad(lat2)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
 
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
