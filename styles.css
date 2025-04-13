@@ -178,7 +178,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("./images/spacepanel.png");
+  background-image: url("./images/alien.png");
   background-size: 170px;
   margin: 0.5rem, 0;
 }
