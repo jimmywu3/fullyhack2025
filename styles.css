@@ -236,6 +236,16 @@ button,
   align-items: center;
 }
 
+.bottom {
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  background-image: url("./images/floating-rocks.png");
+  background-size: 200px;
+
+}
+
 .animations {
   z-index: 0;
 }
