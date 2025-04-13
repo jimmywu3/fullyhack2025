@@ -31,6 +31,10 @@
   list-style-type: none;
 }
 
+.legend li {
+  margin: 0.5rem 0;
+}
+
 .saturn {
   color: var(--saturn-color);
 }
