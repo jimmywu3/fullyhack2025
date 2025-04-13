@@ -272,3 +272,10 @@ button,
   padding-left: 20px;
   font-size: 15px;
 }
+
+.bottom {
+  height: 100%;
+  background-image: url("./images/floating-rocks.png");
+  background-position: center;
+  background-size: 350px;
+}
