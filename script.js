@@ -17,18 +17,18 @@ window.onload = function () {
           // Custom Marker Icon
           var customIcon = L.icon({
             iconUrl: "images/marker-icon.png",
-            iconSize: [38, 38],
+            iconSize: [22, 38],
             iconAnchor: [19, 38],
-            popupAnchor: [0, -38],
+            popupAnchor: [-7, -37],
           });
   
           // Create the marker once
           marker = L.marker([userLat, userLng], { icon: customIcon })
             .addTo(map)
-            .bindPopup("You are here 📍")
+            .bindPopup("You are here")
             .openPopup();
         } else {
-            
+
           // Update marker position as user moves
           marker.setLatLng([userLat, userLng]);
           map.setView([userLat, userLng]);
@@ -50,6 +50,6 @@ window.onload = function () {
     );
   };
 
-function generatemap() {
+function checkBox() {
 
 }
