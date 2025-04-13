@@ -155,6 +155,8 @@ function checkBox() {
       // If the array is more than 0 then we will consistently update the minimum distance when a
       // checkbox is marked
       if (checkedBoxes.length > 0) {
+        
+        // Initialize minDistance to infinity 
         let minDistance = Infinity;
   
         checkedBoxes.forEach(cb => {
@@ -162,6 +164,7 @@ function checkBox() {
           const lng = parseFloat(cb.dataset.lng);
           const distance = getDistanceInMiles(userLat, userLng, lat, lng);
   
+          // Constantly update the minDistance after looping through each checkedBox object
           if (distance < minDistance) {
             minDistance = distance;
           }
@@ -169,7 +172,7 @@ function checkBox() {
   
         header.textContent = `Distance till nearest water fountain: ${minDistance.toFixed(2)} miles`;
       } 
-      
+
       // Else case if there is nothing checkmarked we will default it to no distance shown
       else
       {
