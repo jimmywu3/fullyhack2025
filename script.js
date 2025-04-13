@@ -81,13 +81,15 @@ function checkBox() {
     if (isChecked) {
       engMarker = L.marker([lat, lng], { icon: engineeringIcon })
         .addTo(map)
-        .bindPopup(`
+        .bindPopup(
+          `
           <div style="text-align:center;">
             <h3>Engineering and Computer Science 📍</h3>
             <img src="images/engineering-building.jpg" style="width:150px; height:auto; margin-bottom: 10px; margin-top: 10px;"/>
             <p>This is the Engineering Building. Look here for more!</p>
           </div>
-          `)
+          `
+        )
         .openPopup();
     } else {
       if (engMarker) {
@@ -102,6 +104,7 @@ opening = () => {
   openScreen = document.getElementById("openScreen");
   console.log(openScreen);
   openScreen.style.opacity = "0";
+  setTimeout(() => {
+    openScreen.style.display = "none";
+  }, 3000);
 };
-
-opening();
