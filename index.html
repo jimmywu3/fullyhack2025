@@ -6,17 +6,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
+
+    <!-- Style Sheet and Script for Leaflet-->
     <link rel="stylesheet" href="/path/to/leaflet.css" />
     <script src="/path/to/leaflet.js"></script>
-    <script>
-      window.onload = function () {
-        var map = L.map("map").setView([33.8815, -117.885], 17);
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "&copy; OpenStreetMap contributors",
-        }).addTo(map);
-      };
-    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,6 +28,14 @@
           id="user-input"
           placeholder="Search"
         />
+        <div>
+          <h2 class="legend-header">Legend</h2>
+          <ul class="legend">
+            <li class="color-red red" style="color: red">Engineering and Computer Science (Saturn)</li>
+            <li class="color-blue blue" style="color: blue">Business and Economics (Mars)</li>
+            <li class="color-green green" style="color: green">Natural Sciences and Mathematics (Mercury)</li>
+          </ul>
+        </div>
       </div>
       <div id="map"></div>
     </div>
