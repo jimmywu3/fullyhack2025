@@ -4,7 +4,6 @@ let map, marker, engMarker;
 window.onload = function () {
   navigator.geolocation.watchPosition(
     function (position) {
-
       // Variables for user position
       const userLat = position.coords.latitude;
       const userLng = position.coords.longitude;
@@ -48,11 +47,9 @@ window.onload = function () {
 };
 
 function checkBox() {
-
   // ID "eng-check" tied to our checkbox for Engineering building as reference
   const engCheck = document.getElementById("eng-check");
   engCheck.addEventListener("change", function () {
-
     // 'this.checked' refers to engCheck returning if it is checked or not to isChecked variable
     const isChecked = this.checked;
     const lat = 33.882358;
@@ -78,3 +75,11 @@ function checkBox() {
     }
   });
 }
+
+opening = () => {
+  openScreen = document.getElementById("openScreen");
+  console.log(openScreen);
+  openScreen.style.opacity = "0";
+};
+
+opening();

@@ -15,11 +15,32 @@
   background-color: var(--white);
 }
 
+#openScreen {
+  z-index: 100;
+  position: absolute;
+  height: 100dvh;
+  width: 100dvw;
+  background-color: black;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: 3s;
+  /* display: none; */
+}
+
+#openScreen .startContainer {
+  z-index: inherit;
+  background-color: green;
+}
+
 .main {
   display: flex;
 }
 
 .sidebar {
+  z-index: 1;
   width: 30vw;
   height: 100vh;
   border-right: 3px solid black;
@@ -94,8 +115,9 @@
   border: 2px solid white;
   border-radius: 1rem;
   display: block;
-  height: 85%;
-  width: 80%;
+  height: 80%;
+  width: 75%;
+  z-index: 1;
 }
 .legend {
   font-size: 13px;
@@ -112,13 +134,29 @@
   margin: 0.5rem, 0;
 }
 
+.animations {
+  z-index: 0;
+}
+
 .catUFO {
   position: absolute;
   width: 100px;
   top: 0px;
-  right: 0px;
+  left: 30%;
   animation-duration: 5s;
   animation-iteration-count: infinite;
   animation-name: slide-in;
   animation-direction: alternate;
+}
+
+@keyframes slide-in {
+  from {
+    translate: 150vw 0;
+    scale: 200% 1;
+  }
+
+  to {
+    translate: 0 0;
+    scale: 100% 1;
+  }
 }
