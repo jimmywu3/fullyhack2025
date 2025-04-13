@@ -102,6 +102,16 @@
   padding-right: 5px;
 }
 
+.bottom {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://art.pixilart.com/ec8964245a82f8e.gif);
+  background-size: 350px;
+  margin: 0.5rem, 0;
+}
+
 .catUFO {
   position: absolute;
   width: 100px;
