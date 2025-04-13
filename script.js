@@ -135,35 +135,36 @@ function checkBox() {
         map.setView([lat, lng], 18);
         // Store our marker object inside the markers object with our planet name
         markers[planet] = marker;
+
+               // We can check what's still checked and update distance to that
+               const checkedBoxes = [...checkboxes].filter((cb) => cb.checked);
+
+               if (checkedBoxes.length > 0) {
+                 // Loop through checked boxes and find the closest
+                 let minDistance = Infinity;
+       
+                 checkedBoxes.forEach((cb) => {
+                   const lat = parseFloat(cb.dataset.lat);
+                   const lng = parseFloat(cb.dataset.lng);
+                   const distance = getDistanceInMiles(userLat, userLng, lat, lng);
+       
+                   if (distance < minDistance) {
+                     minDistance = distance;
+                   }
+                 });
+       
+                 header.textContent = `Distance till nearest water fountain: ${minDistance.toFixed(
+                   2
+                 )} miles`;
+               } else {
+                 header.textContent = `Distance till nearest water fountain:`;
+               }
+
       } else {
         // Removes the marker from the object when the planet is unchecked
         if (markers[planet]) {
           map.removeLayer(markers[planet]);
           delete markers[planet];
-        }
-
-        // We can check what's still checked and update distance to that
-        const checkedBoxes = [...checkboxes].filter((cb) => cb.checked);
-
-        if (checkedBoxes.length > 0) {
-          // Loop through checked boxes and find the closest
-          let minDistance = Infinity;
-
-          checkedBoxes.forEach((cb) => {
-            const lat = parseFloat(cb.dataset.lat);
-            const lng = parseFloat(cb.dataset.lng);
-            const distance = getDistanceInMiles(userLat, userLng, lat, lng);
-
-            if (distance < minDistance) {
-              minDistance = distance;
-            }
-          });
-
-          header.textContent = `Distance till nearest water fountain: ${minDistance.toFixed(
-            2
-          )} miles`;
-        } else {
-          header.textContent = `Distance till nearest water fountain:`;
         }
       }
     });
