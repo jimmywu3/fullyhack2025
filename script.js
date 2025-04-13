@@ -2,14 +2,10 @@ let map, marker, engMarker;
 
 
 window.onload = function () {
-<<<<<<< HEAD
-  let map, marker;
-=======
   navigator.geolocation.watchPosition(
     function (position) {
       const userLat = position.coords.latitude;
       const userLng = position.coords.longitude;
->>>>>>> 3faae17 (Added images)
 
       // Initialize map only once
       if (!map) {
@@ -37,8 +33,6 @@ window.onload = function () {
         marker.setLatLng([userLat, userLng]);
         map.setView([userLat, userLng]);
       }
-<<<<<<< HEAD
-=======
     },
     null,
     {
@@ -46,7 +40,6 @@ window.onload = function () {
       maximumAge: 0,
       timeout: 10000,
     }
->>>>>>> 3faae17 (Added images)
   );
 };
 
@@ -63,9 +56,6 @@ function checkBox() {
         popupAnchor: [-4, -37],
       });
 
-<<<<<<< HEAD
-}
-=======
     if (isChecked) {
       engMarker = L.marker([lat, lng], {icon: engineeringIcon})
         .addTo(map)
@@ -79,4 +69,3 @@ function checkBox() {
     }
   });
 }
->>>>>>> 3faae17 (Added images)
